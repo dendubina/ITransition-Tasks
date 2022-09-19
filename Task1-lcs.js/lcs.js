@@ -1,1 +1,1 @@
-lcs = (a) => {if(!a.length)return '';let m=a.reduce((a,b)=>a.length<=b.length?a:b),x=m.length;for(let l=x;l>0;l--){for(let s=0;s<=x-l;s++){let r=m.slice(s,s+l);if(a.every(e=>e.includes(r)))return r;}}return '';};console.log(lcs(process.argv.slice(2)));
+lcs=e=>{if(!e.length)return"";let l=e.reduce(((e,l)=>e.length<=l.length?e:l)),r=l.length;for(let t=r;t>0;t--)for(let n=0;n<=r-t;n++){let r=l.slice(n,n+t);if(e.every((e=>e.includes(r))))return r}return""},console.log(lcs(process.argv.slice(2)));

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32602.291
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task4AuthWebApp", "Task4AuthWebApp.csproj", "{3EB91E8E-7743-4860-BB36-A20DC6E9ABFD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3EB91E8E-7743-4860-BB36-A20DC6E9ABFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EB91E8E-7743-4860-BB36-A20DC6E9ABFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EB91E8E-7743-4860-BB36-A20DC6E9ABFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EB91E8E-7743-4860-BB36-A20DC6E9ABFD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ACAB7C3C-3ABC-45D0-B071-4436B187F302}
+	EndGlobalSection
+EndGlobal
