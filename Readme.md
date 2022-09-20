@@ -38,7 +38,8 @@ Use you language and platform: JavaScript/TypeScript+React+Node.js+Express+ MySQ
 - User can use any non-empty password (even one character).
 - Blocked user should not be able to login, deleted user can re-register.
 
-#### How to submit the solution
+#### How to submit the solution:
+
 Send to p.lebedev@itransition.com:
 - Full name.
 - Link to the deployed project (you can use any hosting you find suitable).

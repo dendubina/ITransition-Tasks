@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Identity;
+using Task4AuthWebApp.Constants;
 
 namespace Task4AuthWebApp.Entities
 {
@@ -9,6 +10,6 @@ namespace Task4AuthWebApp.Entities
 
         public DateTime SignUpDate { get; set; }
 
-        public string Status { get; set; }
+        public UserStatuses Status { get; set; }
     }
 }
