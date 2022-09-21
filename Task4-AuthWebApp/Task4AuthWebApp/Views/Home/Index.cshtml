@@ -1,8 +1,74 @@
-﻿@{
+﻿@using Task4AuthWebApp.Constants
+@model IEnumerable<Task4AuthWebApp.Entities.User>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SignUpDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastSignInDate)
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Email)
+                </td>
+                <td>
+                    @if (item.Status == UserStatuses.Active)
+                    {
+                        <span style="color: seagreen">@Html.DisplayFor(model => item.Status)</span>
+                    }
+
+                    @if (item.Status == UserStatuses.Blocked)
+                    {
+                        <span style="color: red">@Html.DisplayFor(model => item.Status)</span>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.SignUpDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.LastSignInDate)
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
 </div>

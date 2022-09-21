@@ -1,4 +1,8 @@
-﻿.custom-navbar {
+﻿td {
+    text-align: start;
+}
+
+.custom-navbar {
     padding: 0;
 }
 

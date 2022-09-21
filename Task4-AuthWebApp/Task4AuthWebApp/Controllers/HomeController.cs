@@ -1,18 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Linq;
 using Task4AuthWebApp.Models;
+using Task4AuthWebApp.Services.Interfaces;
 
 namespace Task4AuthWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController()
+        private readonly IUserService _userService;
+
+        public HomeController(IUserService userService)
         {
+            _userService = userService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            return View(_userService.FindAll().ToList());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

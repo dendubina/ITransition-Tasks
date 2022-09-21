@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -16,11 +17,13 @@
                 </div>  
                 <div class="is-sign-in-block">  
                     @{
-                        if (Context.Request.Cookies.TryGetValue("token", out string _))
+                        if (User.Identity.IsAuthenticated)
                         {
-                            if (Context.Request.Cookies.TryGetValue("username", out string name))
+                            var userName = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name);
+
+                            if (userName is not null)
                             {
-                                <div class="hello-block"><span style="color: seagreen">Hello, @name</span></div> 
+                                <div class="hello-block"><span style="color: seagreen">Hello, @userName.Value</span></div> 
                             }
 
                             @Html.ActionLink("Logout", "Logout", "Account", routeValues: null, new{ @class= "btn btn-outline-primary login-button" })

@@ -8,10 +8,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Task4AuthWebApp.EF;
 using Task4AuthWebApp.Entities;
+using Task4AuthWebApp.Services;
+using Task4AuthWebApp.Services.Interfaces;
 
 namespace Task4AuthWebApp
 {
@@ -26,6 +29,9 @@ namespace Task4AuthWebApp
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthService, AuthService>();
+
             services.AddDbContext<AppDbContext>(opts =>
                 opts.UseSqlServer(Configuration.GetConnectionString("LocalDb")));
 
@@ -41,6 +47,13 @@ namespace Task4AuthWebApp
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
             });
+
+           /* services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.Cookie.Name = "auth";
+                });*/
+            services.AddAuthorization();
 
             services.AddControllersWithViews();
         }
@@ -62,6 +75,7 @@ namespace Task4AuthWebApp
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
