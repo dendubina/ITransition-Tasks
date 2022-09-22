@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Task4AuthWebApp.EF;
 using Task4AuthWebApp.Entities;
+using Task4AuthWebApp.Middlewares;
 using Task4AuthWebApp.Services;
 using Task4AuthWebApp.Services.Interfaces;
 
@@ -43,12 +44,7 @@ namespace Task4AuthWebApp
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
             });
-
-           /* services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options =>
-                {
-                    options.Cookie.Name = "auth";
-                });*/
+            
             services.AddAuthorization();
 
             services.AddControllersWithViews();
@@ -63,7 +59,6 @@ namespace Task4AuthWebApp
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
@@ -73,6 +68,8 @@ namespace Task4AuthWebApp
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseMiddleware<LogoutMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
