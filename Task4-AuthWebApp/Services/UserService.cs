@@ -51,6 +51,7 @@ namespace Task4AuthWebApp.Services
             }
 
             user.Status = status;
+            await _userManager.UpdateAsync(user);
         }
     }
 }

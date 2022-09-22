@@ -1,5 +1,6 @@
 ﻿@using Task4AuthWebApp.Constants
-@model IEnumerable<Task4AuthWebApp.Entities.User>
+@using System.Security.Cryptography.X509Certificates
+@model IList<UserViewModel>
 
 @{
     ViewData["Title"] = "Home Page";
@@ -8,67 +9,85 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>
-
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SignUpDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastSignInDate)
-            </th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var item in Model)
+    @if (Model != null)
+    {
+        @using (Html.BeginForm("ProcessForm", "Home", FormMethod.Post))
         {
-            <tr>
-                <td>
+            <button type="submit" name="submit" value="Block" class="btn btn-warning">Block</button>
+            <button type="submit" name="submit" value="Unblock" class="btn btn-outline-success"><i class="bi bi-arrow-clockwise"></i></button>
+            <button type="submit" name="submit" value="Delete" class="btn btn-outline-danger"><i class="bi bi-trash3"></i></button>
 
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.Email)
-                </td>
-                <td>
-                    @if (item.Status == UserStatuses.Active)
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.CheckBox("SelectAll", false, new { id = "selectAll" })
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m[0].Id)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m[0].UserName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m[0].Email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m[0].Status)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m[0].SignUpDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m[0].LastSignInDate)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Count(); i++)
                     {
-                        <span style="color: seagreen">@Html.DisplayFor(model => item.Status)</span>
-                    }
+                        @Html.HiddenFor(m => m[i].Id)
+                        @Html.HiddenFor(m => m[i].UserName)
+                        @Html.HiddenFor(m => m[i].Email)
+                        @Html.HiddenFor(m => m[i].Status)
+                        @Html.HiddenFor(m => m[i].SignUpDate)
+                        @Html.HiddenFor(m => m[i].LastSignInDate)
+                        <tr>
+                            <td class="check-box-td">
+                                @Html.CheckBoxFor(m => m[i].Selected, new { @class = "user-check-box" })
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => m[i].Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => m[i].UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => m[i].Email)
+                            </td>
+                            <td>
+                                @if (Model[i].Status == UserStatuses.Active)
+                                {
+                                    <span style="color: seagreen">@Html.DisplayFor(m => m[i].Status)</span>
+                                }
 
-                    @if (item.Status == UserStatuses.Blocked)
-                    {
-                        <span style="color: red">@Html.DisplayFor(model => item.Status)</span>
+                                @if (Model[i].Status == UserStatuses.Blocked)
+                                {
+                                    <span style="color: red">@Html.DisplayFor(m => m[i].Status)</span>
+                                }
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => m[i].SignUpDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => m[i].LastSignInDate)
+                            </td>
+                        </tr>
                     }
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.SignUpDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.LastSignInDate)
-                </td>
-            </tr>
+                </tbody>
+            </table>
         }
-        </tbody>
-    </table>
+
+    }
+
 </div>

@@ -1,4 +1,9 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿{
+    const changeAllCheckBox = document.getElementById("selectAll");
 
-// Write your JavaScript code.
+    changeAllCheckBox.onclick = () => {
+        document.querySelectorAll(".user-check-box").forEach((item) => {
+            item.checked = changeAllCheckBox.checked;
+        });
+    }
+}

@@ -22,7 +22,7 @@ namespace Task4AuthWebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SignIn(SignInModel model)
+        public async Task<IActionResult> SignIn(SignInViewModel model)
         {
             await _authService.SignInAsync(model.Email, model.Password);
 
@@ -37,7 +37,7 @@ namespace Task4AuthWebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SignUp(SignUpModel model)
+        public async Task<IActionResult> SignUp(SignUpViewModel model)
         {
             await _authService.SignUpAsync(model.Email, model.UserName, model.Password);
 
