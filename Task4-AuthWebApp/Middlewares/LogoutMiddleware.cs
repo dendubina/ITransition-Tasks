@@ -30,6 +30,7 @@ namespace Task4AuthWebApp.Middlewares
                 if (user is null || user.Status == UserStatuses.Blocked)
                 {
                     await signInManager.SignOutAsync();
+                    context.Response.Redirect("/Account/SignIn");
                 }
             }
         }
