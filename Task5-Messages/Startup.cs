@@ -1,8 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Task5_Messages.EF;
+using Task5_Messages.Repositories;
+using Task5_Messages.Repositories.Interfaces;
 
 namespace Task5_Messages
 {
@@ -17,6 +21,12 @@ namespace Task5_Messages
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IMessagesRepository, MessagesRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddDbContext<AppDbContext>(opts =>
+                opts.UseSqlServer(Configuration.GetConnectionString("LocalDb")));
+
             services.AddControllersWithViews();
         }
 
