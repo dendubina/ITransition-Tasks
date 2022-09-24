@@ -11,6 +11,8 @@ namespace Task5_Messages.EF.Entities
 
         public string Text { get; set; }
 
+        public DateTime Date { get; set; }
+
         [ForeignKey(nameof(Author))]
         public Guid AuthorId { get; set; }
 

@@ -1,7 +1,23 @@
-﻿@{
+﻿@model ChosenUserViewModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
+    
+    <div class="form-container">
+
+        <form asp-action="Index">
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Choose name</label>
+                <input asp-for="Name" class="form-control"/>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <input type="submit" value="Submit" class="btn btn-primary" style="margin-top: 10px"/>
+        </form>
+    </div>
 </div>

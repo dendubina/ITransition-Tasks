@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -18,14 +17,19 @@ namespace Task5_Messages.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task Create(string name)
+        public async Task CreateAsync(string name)
         {
             _dbContext.Users.Add(new User { Name = name });
 
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<User>> FindByName(string substring) =>
-            await _dbContext.Users.Where(x => x.Name.Contains(substring, StringComparison.InvariantCultureIgnoreCase)).ToListAsync();
+        public async Task<User> GetByNameAsync(string name) =>
+            await _dbContext.Users.FirstOrDefaultAsync(x => string.Equals(x.Name, name));
+
+        public async Task<IEnumerable<User>> FindByNameAsync(string substring) =>
+            await _dbContext.Users
+                .Where(x => x.Name.Contains(substring))
+                .ToListAsync();
     }
 }
