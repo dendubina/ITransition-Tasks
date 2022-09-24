@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
+using Task5_Messages.Models;
 using Task5_Messages.Repositories.Interfaces;
 
 namespace Task5_Messages.Controllers
@@ -15,12 +18,17 @@ namespace Task5_Messages.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetMessageHistoryBlock(Guid userId)
+        public async Task<IActionResult> Messages(Guid userId)
         {
             var messages = await _messagesRepository.GetReceivedMessagesAsync(userId);
 
-            return PartialView(messages);
+            return Json(messages);
         }
 
+        [HttpPost]
+        public IActionResult MessageBlock([FromForm]MessageViewModel message)
+        {
+            return PartialView("GetMessageHistoryBlock", message);
+        }
     }
 }

@@ -1,50 +1,12 @@
-﻿@model IList<Task5_Messages.EF.Entities.Message>
+﻿@model MessageViewModel
 
-@*@if (Model.Any())
-{
-    <div class="accordion-item">
-        <h2 class="accordion-header">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="@($"#collapse{0}")" aria-expanded="false" aria-controls="@($"collapse{0}")">
-                @($"[{Model[0].Date}] Author: {Model[0].Author.Name} Title: {Model[0].Subject}")
-            </button>
-        </h2>
-        <div id="@($"collapse{0}")" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-                @Model[0].Text
-            </div>
-        </div>
+<div class="accordion-item">
+    <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="@($"#flush-collapse{Model.Id}")" aria-expanded="false" aria-controls="@($"flush-collapse{Model.Id}")">
+            <b><span>@($"[{Model.Date}]") Author: </span></b><span>@($"{Model.SenderName}") </span><span><b>Title: </b>@($"{Model.Title}")</span>
+        </button>
+    </h2>
+    <div id="@($"flush-collapse{Model.Id}")" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+        <p style="margin-left: 10px">@Model.Text</p>
     </div>
-}*@
-
-@for (int i = 0; i < Model.Count(); i++)
-{
-    <div class="accordion-item">
-        <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="@($"#flush-collapse{i}")" aria-expanded="false" aria-controls="@($"flush-collapse{i}")">
-                <b><span>@($"[{Model[i].Date}]") Author: </span></b><span>@($"{Model[i].Author.Name}") </span><span><b>Title: </b>@($"{Model[i].Subject}")</span>
-            </button>
-        </h2>
-        <div id="@($"flush-collapse{i}")" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-            <p style="margin-left: 10px">@Model[i].Text</p>
-        </div>
-    </div>
-}
-
-
-
-
-
-
-
-@*<div class="accordion-item">
-        <h2 class="accordion-header" id="headingTwo">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                Accordion Item #2
-            </button>
-        </h2>
-        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-                <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-            </div>
-        </div>
-    </div>*@
+</div>
