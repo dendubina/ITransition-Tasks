@@ -4,7 +4,7 @@
     const input = document.getElementById("receiverInput");
     const list = document.getElementById("list");
     const messagesHistory = document.getElementById("accordionExample");
-    let messagesCount = 0;    
+    let currentMessagesCount = 0;    
 
     input.onkeyup = async (event) => {
 
@@ -35,7 +35,7 @@
     
     const getUserMessages = async (userId) =>{
         let url = new URL("/MessagesHistory/Messages", baseUrl)
-        url.searchParams.append("userId", userId);
+        url.searchParams.append("userId", userId);        
 
         let response = await fetch(url)
             .then(response => response.json());
@@ -46,15 +46,16 @@
     const updateHistory = async () =>{        
         let messages = await getUserMessages(currentUserId);
 
-        updateMessages(messages);        
+        await updateMessagesBlock(messages);        
     }
 
-    const updateMessages = async (messages) => {
-        let url = new URL("/MessagesHistory/MessageBlock", baseUrl)        
-        console.log(messagesCount);
-        console.log( messages.length);
-        
-        for(let i = messagesCount; i < messages.length; i++){
+    const updateMessagesBlock = async (messages) => {
+        let url = new URL("/MessagesHistory/MessageBlock", baseUrl);    
+        let currentArrlength = messages.length;        
+
+        messages.splice(0, currentMessagesCount);
+
+        for (let i = 0; i < messages.length; i++){
             let formData = new FormData();
             formData.append('Id', messages[i].id);
             formData.append('Date', messages[i].date);
@@ -67,11 +68,9 @@
                 method: "post"
             }).then(response => response.text());            
 
-            messagesHistory.insertAdjacentHTML('beforeEnd', response)
-            console.log(response);
+            messagesHistory.insertAdjacentHTML('afterBegin', response);         
         }
-
-        messagesCount = messages.length;
+        currentMessagesCount = currentArrlength;    
     }
 
     updateHistory(currentUserId);

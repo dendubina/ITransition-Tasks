@@ -27,7 +27,7 @@ namespace Task5_Messages.Repositories
         public async Task<IEnumerable<Message>> GetReceivedMessagesAsync(Guid receiverId) =>
             await _dbContext.Messages
                 .Where(x => x.RecipientId == receiverId)
-                .OrderByDescending(x => x.Date)
+                .OrderBy(x => x.Date)
                 .Include(x => x.Author)
                 .Include(x => x.Recipient)
                 .ToListAsync();

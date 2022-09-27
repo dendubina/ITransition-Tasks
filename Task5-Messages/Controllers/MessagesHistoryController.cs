@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +29,7 @@ namespace Task5_Messages.Controllers
         [HttpPost]
         public IActionResult MessageBlock([FromForm]MessageViewModel message)
         {
-            return PartialView("GetMessageHistoryBlock", message);
+            return PartialView("MessagesHistoryBlock", message);
         }
     }
 }
