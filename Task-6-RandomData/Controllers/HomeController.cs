@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Linq;
+using Task_6_RandomData.Constants;
 using Task_6_RandomData.Logic;
 using Task_6_RandomData.Models;
 
@@ -8,6 +10,7 @@ namespace Task_6_RandomData.Controllers
 {
     public class HomeController : Controller
     {
+        private const int PageSize = 20;
 
         public HomeController()
         {
@@ -21,9 +24,18 @@ namespace Task_6_RandomData.Controllers
 
         public IActionResult GetData(RequestDataModel model)
         {
-            var data = Generator.GetData(model.Region, model.MistakesCount, model.Seed);
+            var region = model.Region;
+            var mistakesCount = model.MistakesCount;
 
-            return Json(data.Skip((model.PageNumber - 1) * 20).Take(20));
+            if (model.Seed > 0)
+            {
+                region = (Regions)GetHash(model.Seed, Enum.GetNames<Regions>().Length);
+                mistakesCount = GetHash(model.Seed, 100);
+            }
+
+            var data = Generator.GetData(region, mistakesCount, model.Seed);
+
+            return Json(data.Skip((model.PageNumber - 1) * PageSize).Take(PageSize));
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -31,5 +43,7 @@ namespace Task_6_RandomData.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        private static int GetHash(int key, int maxValue) => Math.Abs(key.GetHashCode() % maxValue);
     }
 }
