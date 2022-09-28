@@ -48,11 +48,29 @@
         currentPage++;
     }
 
+    const getCsv = async () =>{
+        let url = new URL("Home/CreateCsv", baseUrl);       
+
+        if (currentData.length > 0){
+            await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(currentData)
+        }).then(response => response.blob())
+          .then(blob => {
+            let file = window.URL.createObjectURL(blob);
+            window.location.assign(file);
+          });       
+        }        
+    }
+
     handleInputChange = () => {
         document.getElementsByTagName("tbody")[0].innerHTML = "";
         currentPage = 1;
         currentData = [];
-                
+
         getData();
     }
 
@@ -87,6 +105,10 @@
     randomSeed.onclick = () =>{
         seedInput.value = getRandomInt(100000);
         handleInputChange();
+    }
+
+    createCsv.onclick = async () =>{
+        await getCsv();
     }
 
     window.addEventListener('scroll', () => {
