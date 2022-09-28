@@ -4,4 +4,39 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
+
+    <label for="regionInput" class="form-label">Select Region</label>
+    <select class="form-select datainput" id="regionInput">
+        <option value="0">Ru</option>
+        <option value="1">Us</option>
+        <option value="2">De</option>
+    </select>
+
+    <label for="customRange1" class="form-label">Select errors count</label>
+    <input type="range" class="form-range datainput" id="errorsCountSlider" step="0.25" value="0">
+
+    <label for="customRange1" class="form-label">Select errors count</label>
+    <input type="text" class="form-input datainput" id="errorsCountText" step="0.25" value="0">
+
+    <table class="table" id="dataTable">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    FullName
+                </th>
+                <th>
+                    Address
+                </th>
+                <th>
+                    Phone
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
 </div>

@@ -3,6 +3,7 @@
     public enum Regions
     {
         Ru,
-        En,
+        Us,
+        De,
     }
 }

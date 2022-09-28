@@ -5,4 +5,8 @@
     <RootNamespace>Task_6_RandomData</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="bogus" Version="34.0.2" />
+  </ItemGroup>
+
 </Project>

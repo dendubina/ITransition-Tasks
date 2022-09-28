@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Text;
 using Task_6_RandomData.Constants;
-using Task_6_RandomData.EF.Entities;
 using Task_6_RandomData.Models;
 
 namespace Task_6_RandomData.Logic
@@ -18,7 +17,7 @@ namespace Task_6_RandomData.Logic
 
         public MistakesMaker(Regions region)
         {
-            _chosenChars = region == Regions.En ? LatinChars : CyrillicChars;
+            _chosenChars = region is Regions.Us or Regions.De ? LatinChars : CyrillicChars;
 
             AvailableErrors = new Errors[]
             {
@@ -80,7 +79,7 @@ namespace Task_6_RandomData.Logic
             var props = person.GetType().GetProperties().Where(x => x.PropertyType == typeof(string)).ToArray();
 
             var current = _rnd.Next(props.Length);
-            var value = props[current].GetValue(person).ToString();
+            var value = props[current].GetValue(person)?.ToString();
             props[current].SetValue(person, AvailableErrors[_rnd.Next(AvailableErrors.Length)](value));
         }
     }
