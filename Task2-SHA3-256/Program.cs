@@ -8,8 +8,8 @@ namespace Task2_SHA3_256
 {
     public class Program
     {
-        private const string Email = "ddubina.job@gmail.com";
-        private static readonly DirectoryInfo _directory = new("D:\\git\\ITransition-Tasks\\Task2-SHA3-256\\DataFiles");
+        private const string Email = "";
+        private static readonly DirectoryInfo _directory = new("");
         private static readonly Sha3Digest _hashAlgorithm = new(256);
         
         static void Main(string[] args)
